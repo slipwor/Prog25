@@ -52,6 +52,7 @@ three:					{
 		System.out.println("После цикла for");
 		
 		System.out.println();
+
 		//Второй пример использования оператора break с меткой
 done:		for (i=0; i< 10; i++) {
 			for(int j=0; j<10; j++) {
@@ -83,6 +84,26 @@ stop2:		{
 			for(y=0; y<5; y++) {
 				if(y==2)  break stop2;
 				System.out.println("x и y : " + x + " " + y);
+			}
+		}
+		System.out.println();
+
+		//Оператор continue 
+		for(i=0; i<=10; i++) {
+			if((i%2) != 0) 
+				continue;
+			System.out.print(i + " ");
+		}
+		System.out.println();
+
+		//Применение continue с меткой
+outerloop:
+		for(i=1; i<10; i++) {
+			System.out.print("\nВнешний цикл: проход " + i + ", внутренний цикл: ");
+			for(int j=1; j<10; j++) {
+				if(j==5)
+					continue outerloop;
+				System.out.print(j);
 			}
 		}
 		System.out.println();
