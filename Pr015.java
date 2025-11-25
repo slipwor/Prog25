@@ -4,7 +4,17 @@ class TwoDShape {
 	private double height;
 	private String color;
 	private double line;
+	int i = 25;
 
+	TwoDShape() {
+		width = height = 0;
+	}
+
+	TwoDShape(double x) {
+		width = height = x;
+		line = 0.1;
+		color = "Чёрный";
+	}
 	TwoDShape(double w, double h, String c, double l) {
 		if (w < 21)
 			width = w;
@@ -52,7 +62,17 @@ class TwoDShape {
 //Подкласс суперкласса TwoDShape (дочерний класс) для описания треугольников
 class Triangle extends TwoDShape {
 	String style;
+	int i = 50;
 //Конструктор, определённый в подклассе	
+	Triangle() {
+		super();
+		style = "Без стиля";
+	}
+
+	Triangle(double x) {
+		super(x);
+		style = "Точечный";
+	}
 	Triangle(String s, double w, double h, String c, double l) {
 		super(w, h, c, l);
 		style = s;
@@ -62,6 +82,11 @@ class Triangle extends TwoDShape {
 	}
 	void showStyle() {
 		System.out.println("Стиль треугольника: " + style);
+	}
+
+	void showI() {
+		System.out.println("Значение i в подклассе: " + i);
+		System.out.println("Значение i в суперклассе: " + super.i);
 	}
 }
 //Подкласс суперкласса TwoDShape для описания прямоугольников
@@ -88,12 +113,15 @@ class Pr015 {
 	public static void main(String[] args) {
 		Triangle t1 = new Triangle("Пунктирный", 5.1, 4.3, "Зелёный", 0.2);
 		Triangle t2 = new Triangle("Сплошной", 7.1, 3.3, "Красный", 0.3);
+		Triangle t3 = new Triangle(5.5);
 
 /*		t2.setWidth(7.1);
 		t2.setHeight(3.3);
 		t2.style = "Сплошной";
 */
 		TwoDShape s1 = new TwoDShape(10.0,6.2,"Жёлтый", 0.5);
+		TwoDShape s2 = new TwoDShape();
+		TwoDShape s3 = new TwoDShape(5.0);
 		s1.setWidth(10.0);
 		s1.setHeight(6.2);
 
@@ -110,14 +138,31 @@ class Pr015 {
 		System.out.println("Площадь: " + t2.area());
 		System.out.println();
 
+		System.out.println("Информация об объекте t3: ");
+		t3.showStyle();
+		t3.showDim();
+		System.out.println("Площадь: " + t3.area());
+		String str2 = t3.getColor();
+		System.out.println(str2);
+		System.out.println();
 		//Родительский класс не имеет доступа к переменным, определённым в подклассе
 		//s1.style = "Абстрактная фигура"; Родительский класс не может инициализировать переменную подкласса
 		System.out.println("Информация об объекте s1: "); 
 		//Родительский класс не имеет доступа к методам своего подкласса
 		//s1.showStyle();
 		s1.showDim();
+
+		System.out.println("\nИнформация об объекте s2: ");
+		s2.showDim();
+		System.out.print("Цвет фигуры s2: ");
+		s2.getColor();
 		//System.out.println("Площадь: " + s1.area()); Вызов метода подкласса, неприменим к s1
-		System.out.println();
+		
+		System.out.println("\nИнформация об объекте s3: ");
+		s3.showDim();
+		System.out.print("Цвет фигуры s3: ");
+		s3.getColor();
+		System.out.println("\n");
 
 		Rectangle r1 = new Rectangle(35.1,4.3,"Синий",1.5);
 		
@@ -129,5 +174,10 @@ class Pr015 {
 		System.out.println("Площадь: " + r1.area());
 		System.out.println("r1 является квадратом: " + r1.isSquare());
 		System.out.println();
+
+		//Проверка доступа к одноименной переменной в суперклассе из подкласса
+		System.out.println("Значение i в экземпляре 2DShape: " + s1.i);
+		System.out.println("Значение i в экземпляре Triangle: " + t1.i);
+		t1.showI();
 	}
 }
